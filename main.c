@@ -41,19 +41,24 @@ void generateGroups(Student students[], int numStudents, int numGroups) {
     }
 }
 
+
 // Function to print the group assignments
 void printGroups(Student students[], int numStudents, int numGroups) {
     printf("\nGROUP ASSIGNMENTS:\n");
     for (int groupNum = 1; groupNum <= numGroups; groupNum++) {
         printf("GROUP %d:\n", groupNum);
+        int membersInGroup = 0; // Counter to track the number of members in the group
         for (int i = 0; i < numStudents; i++) {
             if (students[i].group == groupNum) {
                 printf("- %s\n", students[i].name);
+                membersInGroup++;
             }
         }
+        printf("Number of members in group %d: %d\n", groupNum, membersInGroup);
         printf("\n");
     }
 }
+
 
 // Function to display current student data
 void displayCurrentStudentData(Student students[], int numStudents, int numGroups) {
