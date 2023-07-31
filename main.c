@@ -69,6 +69,7 @@ void displayCurrentStudentData(Student students[], int numStudents, int numGroup
     printf("-------------------------------------\n");
 }
 
+
 // Function to save group assignments to a file
 void saveToFile(char filename[], Student students[], int numStudents, int numGroups) {
     FILE* file = fopen(filename, "w");
@@ -80,11 +81,14 @@ void saveToFile(char filename[], Student students[], int numStudents, int numGro
     fprintf(file, "GROUP ASSIGNMENTS:\n");
     for (int groupNum = 1; groupNum <= numGroups; groupNum++) {
         fprintf(file, "GROUP %d:\n", groupNum);
+        int membersInGroup = 0; // Counter to track the number of members in the group
         for (int i = 0; i < numStudents; i++) {
             if (students[i].group == groupNum) {
                 fprintf(file, "- %s\n", students[i].name);
+                membersInGroup++;
             }
         }
+        fprintf(file, "NUMBER OF MEMBERS IN GROUP %d: %d\n", groupNum, membersInGroup);
         fprintf(file, "\n");
     }
 
@@ -92,8 +96,9 @@ void saveToFile(char filename[], Student students[], int numStudents, int numGro
     fprintf(file, "NUMBER OF GROUPS: %d\n", numGroups);
 
     fclose(file);
-    printf("\nYOUR FILE <%s> HAS BEEN GENERATED\n", filename);
+    printf("\nYOUR FILE <%s> HAS BEEN GENERATED!\n", filename);
 }
+
 
 int readIntInput() {
     int input;
