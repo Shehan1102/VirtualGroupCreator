@@ -158,7 +158,7 @@ int main() {
 
     switch(userInput){
     case 1:
-        printf("\nENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (THIS FILE CREATED IN THE PROJECT FOLDER. NAME SHOULD BE LIKE THIS - name.txt ): ");
+        printf("\nENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (THIS FILE WILL BE CREATED IN THE PROJECT FOLDER. NAME SHOULD BE LIKE THIS - name.txt ): ");
         scanf("%s", filename);
 
                 char newFilename[100]; // New variable to store the latest file name
@@ -232,9 +232,9 @@ int main() {
         printf("\n\nOPTIONS :\n");
         printf("    1. REGENERATE THE GROUPS FROM THE EXISTING STUDENTS.\n");
         printf("    2. ADD NEW STUDENTS AND UPDATE THE GROUPS.\n");
-        printf("    3. RESTART PROCESS INPUT NAMES BY TYPING.\n");
-        printf("    4. FIND A STUDENT.\n");
-        printf("    5. INPUT STUDENT NAMES FROM A FILE.\n");
+        printf("    3. FIND A STUDENT.\n");
+        printf("    4. RESTART PROCESS INPUT NAMES BY TYPING.\n");
+        printf("    5. RESTART THE PROCESS BY INPUT STUDENT NAMES FROM A FILE.\n");
         printf("    6. EXIT.\n\n");
 
         printf("ENTER YOUR OPTION (1, 2, 3, 4, 5, OR 6) : ");
@@ -286,34 +286,7 @@ int main() {
                 break;
             }
             case 3:
-                clearConsole();
-                printf("ENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (NAME SHOULD BE LIKE THIS - name.txt): ");
-                scanf("%s", filename);
 
-                printf("\nENTER THE NUMBER OF STUDENTS (NUMERIC) : ");
-                while (scanf("%d", &numStudents) != 1 || numStudents < 1 || numStudents > MAX_STUDENTS) {
-                    printf("INVALID INPUT! PLEASE ENTER A VALID NUMERIC VALUE (1-%d): ", MAX_STUDENTS);
-                    while (getchar() != '\n'); // Clear input buffer
-                }
-                printf("\n");
-
-                for (int i = 0; i < numStudents; i++) {
-                    printf("ENTER THE NAME/NUMBER STUDENT OF STUDENT %d : ", i + 1);
-                    scanf("%s", students[i].name);
-                }
-
-                printf("\nENTER THE NUMBER OF GROUPS : ");
-                while (scanf("%d", &numGroups) != 1 || numGroups < 1 || numGroups > MAX_GROUPS) {
-                    printf("INVALID INPUT! PLEASE ENTER A VALID NUMERIC VALUE (1-%d): ", MAX_GROUPS);
-                    while (getchar() != '\n'); // Clear input buffer
-                }
-
-                generateGroups(students, numStudents, numGroups);
-                printGroups(students, numStudents, numGroups);
-
-                saveToFile(filename, students, numStudents, numGroups);
-                break;
-            case 4:
                 clearConsole();
                 char searchName[MAX_NAME_LENGTH];
                 int found = 0;
@@ -364,6 +337,33 @@ int main() {
                     }
                 } while (1);
 
+                break;
+            case 4:
+                clearConsole();
+                printf("ENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (NAME SHOULD BE LIKE THIS - name.txt): ");
+                scanf("%s", filename);
+
+                printf("\nENTER THE NUMBER OF STUDENTS (NUMERIC) : ");
+                while (scanf("%d", &numStudents) != 1 || numStudents < 1 || numStudents > MAX_STUDENTS) {
+                    printf("INVALID INPUT! PLEASE ENTER A VALID NUMERIC VALUE (1-%d): ", MAX_STUDENTS);
+                    while (getchar() != '\n'); // Clear input buffer
+                }
+                printf("\n");
+
+                for (int i = 0; i < numStudents; i++) {
+                    printf("ENTER THE NAME/NUMBER STUDENT OF STUDENT %d : ", i + 1);
+                    scanf("%s", students[i].name);
+                }
+
+                printf("\nENTER THE NUMBER OF GROUPS : ");
+                while (scanf("%d", &numGroups) != 1 || numGroups < 1 || numGroups > MAX_GROUPS) {
+                    printf("INVALID INPUT! PLEASE ENTER A VALID NUMERIC VALUE (1-%d): ", MAX_GROUPS);
+                    while (getchar() != '\n'); // Clear input buffer
+                }
+
+                generateGroups(students, numStudents, numGroups);
+                printGroups(students, numStudents, numGroups);
+                saveToFile(filename, students, numStudents, numGroups);
                 break;
             case 5:
                 clearConsole();
