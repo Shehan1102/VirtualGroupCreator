@@ -30,6 +30,11 @@ Create and manage student groups with ease using the Virtual Group Creator! This
 7. The program will generate random student groups and display the assignments on the screen.
 8. You can save the group assignments to a file (e.g., `group_assignments.txt`) in the current folder for future reference.
 
+## Example Text File
+
+To make it easy to try out the Virtual Group Creator project, I've included an example text file (`example.txt`) that contains 25 student Numbers. This file can be found in the root directory.
+
+
 ## Requirements
 
 - C compiler
