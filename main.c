@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>               // ... (all the necessary header files and definitions)
+#include <string.h>      // ... (all the necessary header files and definitions)
 #include <time.h>
 #include <stdbool.h>
 
@@ -92,6 +92,7 @@ void saveToFile(char filename[], Student students[], int numStudents, int numGro
         fprintf(file, "\n");
     }
 
+    // Write the total number of students and groups to the file
     fprintf(file, "NUMBER OF STUDENTS: %d\n", numStudents);
     fprintf(file, "NUMBER OF GROUPS: %d\n", numGroups);
 
@@ -99,7 +100,7 @@ void saveToFile(char filename[], Student students[], int numStudents, int numGro
     printf("\nYOUR FILE <%s> HAS BEEN GENERATED!\n", filename);
 }
 
-
+// Function to read an integer input from the user
 int readIntInput() {
     int input;
     char ch;
@@ -115,6 +116,8 @@ int readIntInput() {
         }
     }
 }
+
+// Function to read student names from a file and populate the students array
 int readStudentsFromFile(char filename[], Student students[], int *numStudents) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -130,7 +133,7 @@ int readStudentsFromFile(char filename[], Student students[], int *numStudents) 
     fclose(file);
     return 1;
 }
-
+// Function to read an integer input in a specific range
 int readIntInputInRange(int min, int max) {
     int input;
     char ch;
@@ -152,22 +155,25 @@ int readIntInputInRange(int min, int max) {
 
 
 int main() {
+    // Variable declarations
     char filename[100];
     int userInput;
     Student students[MAX_STUDENTS];
     int numStudents, numGroups;
     bool flag1 = true;
 
-    printf("\n\n-------------  WELCOME TO THE VIRTUAL GROUP CREATOR  -------------\n\n");
+    // Welcome message
+    printf("\n-------------  WELCOME TO THE VIRTUAL GROUP CREATOR  -------------\n\n\n");
 
     do{
 
+    // Ask the user whether to add names using a text file or by typing manually
     printf("ARE YOU WANT TO ADD NAMES USING TEXT FILES OR BY BY TYPING ? \n");
     printf("IF YOU USING TEXT FILE ENTER 1 ELSE ENTER 0 : ");
     userInput = readIntInputInRange(0,1);
 
     switch(userInput){
-    case 1:
+    case 1: // Case 1: Read student names from a file
         printf("\nENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (THIS FILE WILL BE CREATED IN THE PROJECT FOLDER. NAME SHOULD BE LIKE THIS - name.txt ): ");
         scanf("%s", filename);
 
@@ -191,19 +197,13 @@ int main() {
 
                     generateGroups(students, numStudentsFromFile, numGroups);
                     printGroups(students, numStudentsFromFile, numGroups);
-
                     numStudents = numStudentsFromFile; // Update the numStudents value for other options
-
-                    // Update the filename variable with the latest file name
-                    //strcpy(filename, newFilename);
-
-
                     saveToFile(filename, students, numStudents, numGroups);
                 }
 
                 flag1 =false;
         break;
-    case 0:
+    case 0: // Case 0: Manually input student names
         printf("\nENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (NAME SHOULD BE LIKE THIS - name.txt): ");
         scanf("%s", filename);
 
@@ -239,6 +239,7 @@ int main() {
 
     int choice;
     do {
+        // Main menu options
         printf("\n\nOPTIONS :\n");
         printf("    1. REGENERATE THE GROUPS FROM THE EXISTING STUDENTS.\n");
         printf("    2. ADD NEW STUDENTS AND UPDATE THE GROUPS.\n");
@@ -255,6 +256,7 @@ int main() {
 
         switch (choice) {
             case 1:
+                // Regenerate groups from the existing students
                 clearConsole();
                 generateGroups(students, numStudents, numGroups);
                 printf("\nRegenerated ");
@@ -263,6 +265,7 @@ int main() {
                 saveToFile(filename, students, numStudents, numGroups);
                 break;
             case 2: {
+                // Add new students and update groups
                 clearConsole();
                 int additionalStudents, newNumGroups;
 
@@ -296,7 +299,7 @@ int main() {
                 break;
             }
             case 3:
-
+                // Find a student by name
                 clearConsole();
                 char searchName[MAX_NAME_LENGTH];
                 int found = 0;
@@ -349,6 +352,7 @@ int main() {
 
                 break;
             case 4:
+                // Restart the process of inputting names manually
                 clearConsole();
                 printf("ENTER THE FILE NAME TO SAVE THE GROUP ASSIGNMENTS (NAME SHOULD BE LIKE THIS - name.txt): ");
                 scanf("%s", filename);
@@ -376,6 +380,7 @@ int main() {
                 saveToFile(filename, students, numStudents, numGroups);
                 break;
             case 5:
+                // Restart the process by inputting student names from a file
                 clearConsole();
                 char newFilename[100]; // New variable to store the latest file name
 
@@ -411,6 +416,7 @@ int main() {
                 break;
 
             case 6:
+                 // Exit the program
                 printf("\n\n-----  EXITING THE PROGRAM. GOODBYE!  -----\n\n\n");
                 break;
             default:
